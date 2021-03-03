@@ -25,16 +25,18 @@ struct ContentView: View {
                         Text(item.dueDate, style: .date)
                     }
                 }
-                .onMove(perform: { indices, newOffset in AssignmentItem.items.move(fromOffsets: indices, toOffset: newOffset)
+                .onMove(perform: { indices, newOffset in
+                    assignmentList.items.move(fromOffsets: indices, toOffset: newOffset)
                 })
-                .onDelete(perform: { indexSet in AssignmentItem.items.remove(atOffsets: indexSet)
+                .onDelete(perform: { indexSet in
+                    assignmentList.items.remove(atOffsets: indexSet)
                 })
             }
             .sheet(isPresented: $showingAddAssignmentView, content: {
                 AddAssignmentView(assignmentList: assignmentList)
             })
             .navigationBarTitle("Assignment List")
-            .navigationBarTitle(leading: EditButton(),
+            .navigationBarItems(leading: EditButton(),
                                 trailing: Button(action: {
                                                     showingAddAssignmentView = true}) {
                                     Image(systemName: "plus")
@@ -51,7 +53,7 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-struct AssignmentItem: Identifiable {
+struct AssignmentItem: Identifiable, Codable {
     var id = UUID()
     var course = String()
     var description = String()

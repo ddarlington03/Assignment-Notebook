@@ -31,7 +31,7 @@ struct AddAssignmentView: View {
                     if course.count > 0 && description.count > 0 {
                         let item = AssignmentItem(id: UUID(), course: course, description:
                                                     description, dueDate: dueDate)
-                        assignmentList.append(item)
+                        assignmentList.items.append(item)
                         presentationMode.wrappedValue.dismiss()
                     }
                 })
